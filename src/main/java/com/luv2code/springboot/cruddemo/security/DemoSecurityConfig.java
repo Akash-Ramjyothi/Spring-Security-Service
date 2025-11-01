@@ -20,7 +20,7 @@ public class DemoSecurityConfig {
         UserDetails mary = User.builder().username("mary").password("{noop}test123").roles("EMPLOYEE", "MANAGER").build();
         UserDetails susan = User.builder().username("susan").password("{noop}test123").roles("EMPLOYEE", "MANAGER", "ADMIN").build();
 
-        System.out.println("👨‍🎓john = " + john);
+        System.out.println("👨‍🎓mary = " + mary);
 
         return new InMemoryUserDetailsManager(john, mary, susan);
     }
