@@ -20,10 +20,14 @@ public class DemoSecurityConfig {
 
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource){
-        UserDetailsManager theDataSource = new JdbcUserDetailsManager(dataSource);
-        System.out.println("🍿 theDataSource = " + theDataSource);
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
-        return theDataSource;
+        jdbcUserDetailsManager.setUsersByUsernameQuery("select user_id,pw,active from members where user_id=?");
+        jdbcUserDetailsManager.setGroupAuthoritiesByUsernameQuery("select user_id, roles from roles where user_id=?");
+
+        System.out.println("🚀 jdbcUserDetailsManager = " + jdbcUserDetailsManager);
+
+        return jdbcUserDetailsManager;
     }
 
     @Bean
